@@ -35,15 +35,13 @@ data = []
 
 # Iterate over format config and extract content
 for key, value in format_config.items():
-    matches = soup.find_all(class_=re.compile(value))
+    matches = soup.select(value)
     for idx, elem in enumerate(matches):
         key_matches = {key: elem.get_text()}  # Create a new dictionary for each match
         if idx < len(data):
-
             # If the index already exists in the list, update the existing dictionary object
             data[idx].update(key_matches)
         else:
-
             # If the index doesn't exist in the list, append the new dictionary object
             data.append(key_matches)
 
