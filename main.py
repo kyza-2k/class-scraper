@@ -47,8 +47,8 @@ def scrape_website(config):
     return data
 
 
-@app.route("/scrape", methods=["POST"])
-def scrape():
+@app.route("/", methods=["POST"])
+def index():
     config = request.get_json()
     data = scrape_website(config)
     if data is not None:
