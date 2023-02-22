@@ -58,7 +58,7 @@ The scraper will extract data from the URL specified in the configuration file a
 
 ## Roadmap
 
-- [ ] Support for more complex HTML parsing and extraction, such as extracting data from nested elements or elements with specific attributes.
+- [x] Support for more complex HTML parsing and extraction, such as extracting data from nested elements or elements with specific attributes.
 - [ ] Support for exporting the JSON table to other formats, such as CSV or Excel.
 - [ ] Support for scraping multiple pages or URLs in a single run.
 - [ ] Support for scheduling periodic scrapes using a cron job or other scheduling mechanism.
