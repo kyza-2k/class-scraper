@@ -2,6 +2,7 @@ import sys
 import requests
 import re
 import json
+import os
 from bs4 import BeautifulSoup
 from flask import Flask, jsonify, request
 
@@ -68,4 +69,4 @@ if __name__ == "__main__":
         if data is not None:
             print(json.dumps(data, indent=2))
     else:
-        app.run()
+        app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
