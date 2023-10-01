@@ -1,16 +1,21 @@
-import sys
+from flask import Flask, jsonify
 import requests
-import re
-import json
-import os
 from bs4 import BeautifulSoup
-from flask import Flask, jsonify, request
-from flask_cors import CORS
-
 
 app = Flask(__name__)
 
-CORS(app)
+
+@app.route("/scrape", methods=["GET"])
+def scrape_endpoint():
+    config = {
+        "url": "https://example.com",
+        "format": {
+            "name": ".name-class",
+            "price": ".price-class",
+        },
+    }
+    data = scrape_website(config)
+    return jsonify(data)
 
 
 def scrape_website(config):
@@ -51,26 +56,5 @@ def scrape_website(config):
     return data
 
 
-@app.route("/", methods=["POST"])
-def index():
-    config = request.get_json()
-    data = scrape_website(config)
-    if data is not None:
-        return jsonify(data)
-    else:
-        return "Error scraping website", 400
-
-
 if __name__ == "__main__":
-    if len(sys.argv) == 2 and sys.argv[1] != "api":
-        config_file = sys.argv[1]
-
-        # Load the config file
-        with open(config_file) as f:
-            config = json.load(f)
-
-        data = scrape_website(config)
-        if data is not None:
-            print(json.dumps(data, indent=2))
-    else:
-        app.run(debug=True, port=os.getenv("PORT", default=5000))
+    app.run(debug=True)
